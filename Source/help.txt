@@ -1,0 +1,15 @@
+Burning Chicken
+
+Just like the Burning Ship fractal,
+this is just one step removed from the Mandelbrot set.
+
+Comment out one line the shader to get the Mandelbrot.
+
+
+The two control widgets work the same way:
+
+* Press and hold to either side of center to affect
+  parameter(s) in specified direction and speed.
+* Double Tap to toggle Fast versus Slow editing.
+  (Red vs Green background color)
+
