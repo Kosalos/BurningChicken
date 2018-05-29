@@ -15,7 +15,7 @@
 		1D1490681F9FA199004B538F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D1490671F9FA199004B538F /* ViewController.swift */; };
 		1D14906F1F9FA199004B538F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D14906E1F9FA199004B538F /* Assets.xcassets */; };
 		1D1490721F9FA199004B538F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1D1490701F9FA199004B538F /* LaunchScreen.storyboard */; };
-		1D37793E20AF600F00494F91 /* ColorMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D37793D20AF600F00494F91 /* ColorMap.swift */; };
+		1D3779A020BE071600494F91 /* ColorMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D37799F20BE071500494F91 /* ColorMap.swift */; };
 		1DCAC5751FA349E6000E90E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1DCAC5731FA349E6000E90E8 /* Main.storyboard */; };
 		1DD98919207917B000B209A5 /* CMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD98917207917AF00B209A5 /* CMove.swift */; };
 		1DD9891A207917B000B209A5 /* CZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DD98918207917AF00B209A5 /* CZoom.swift */; };
@@ -32,7 +32,7 @@
 		1D14906E1F9FA199004B538F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1D1490711F9FA199004B538F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1D1490731F9FA199004B538F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1D37793D20AF600F00494F91 /* ColorMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorMap.swift; path = "../../ProMarchingCubes 2/Source/ColorMap.swift"; sourceTree = "<group>"; };
+		1D37799F20BE071500494F91 /* ColorMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorMap.swift; sourceTree = "<group>"; };
 		1D594DC6206B17F900A7EB3A /* MandelBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = MandelBox.app; path = BurningChicken.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DCAC5741FA349E6000E90E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		1DD98917207917AF00B209A5 /* CMove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMove.swift; sourceTree = "<group>"; };
@@ -74,7 +74,7 @@
 				1D1490671F9FA199004B538F /* ViewController.swift */,
 				1DD98917207917AF00B209A5 /* CMove.swift */,
 				1DD98918207917AF00B209A5 /* CZoom.swift */,
-				1D37793D20AF600F00494F91 /* ColorMap.swift */,
+				1D37799F20BE071500494F91 /* ColorMap.swift */,
 				1DCAC5731FA349E6000E90E8 /* Main.storyboard */,
 				1D03ED102071A85900E72BC5 /* SaveLoadViewController.swift */,
 				1D03ED0C2071A80800E72BC5 /* HelpViewController.swift */,
@@ -167,8 +167,8 @@
 				1D1490681F9FA199004B538F /* ViewController.swift in Sources */,
 				1D1490631F9FA199004B538F /* AppDelegate.swift in Sources */,
 				1DD9891A207917B000B209A5 /* CZoom.swift in Sources */,
-				1D37793E20AF600F00494F91 /* ColorMap.swift in Sources */,
 				1D03ED112071A85900E72BC5 /* SaveLoadViewController.swift in Sources */,
+				1D3779A020BE071600494F91 /* ColorMap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
