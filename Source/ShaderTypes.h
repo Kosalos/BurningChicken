@@ -16,7 +16,17 @@ struct Control {
     
     float xmin,xmax,dx;
     float ymin,ymax,dy;
-    
+
+    int coloringFlag;
+    int chickenFlag;
+    int skip;
+    float stripeDensity;
+    float escapeRadius2;
+    float multiplier;
+    float R;
+    float G;
+    float B;
+
     float future1;
     float future2;
     float future3;

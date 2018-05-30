@@ -112,7 +112,7 @@ class CMove: UIView {
     }
 }
 
-// MARK:
+// MARK:- Shared graphics functions
 
 let limColor = UIColor(red:0.25, green:0.25, blue:0.2, alpha: 1)
 let nrmColorFast = UIColor(red:0.25, green:0.2, blue:0.2, alpha: 1)
@@ -132,3 +132,11 @@ func drawText(_ x:CGFloat, _ y:CGFloat, _ color:UIColor, _ sz:CGFloat, _ str:Str
     
     str.draw(in: CGRect(x:x, y:y, width:800, height:100), withAttributes: textFontAttributes)
 }
+
+func drawFilledCircle(_ context:CGContext, _ center:CGPoint, _ diameter:CGFloat, _ color:CGColor) {
+    context.beginPath()
+    context.addEllipse(in: CGRect(x:CGFloat(center.x - diameter/2), y:CGFloat(center.y - diameter/2), width:CGFloat(diameter), height:CGFloat(diameter)))
+    context.setFillColor(color)
+    context.fillPath()
+}
+

@@ -12,7 +12,7 @@ class SaveLoadCell: UITableViewCell {
 
 //MARK:-
 
-let versionNumber:Int32 = 0x55ab
+let versionNumber:Int32 = 0x55aa
 
 class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableViewDelegate,SLCellDelegate {
     var cc = Control()
@@ -106,6 +106,7 @@ class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableVie
         }
         alertController.addAction(cancelAction)
         
+        self.present(alertController, animated: true, completion:nil)
     }
 
     //MARK:-

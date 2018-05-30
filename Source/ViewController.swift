@@ -23,13 +23,45 @@ class ViewController: UIViewController {
     
     @IBOutlet var cMove: CMove!
     @IBOutlet var cZoom: CZoom!
-    @IBOutlet var imageView: UIImageView!
+    @IBOutlet var imageView: ImageView!
     @IBOutlet var resetButton: UIButton!
     @IBOutlet var saveLoadButton: UIButton!
     @IBOutlet var helpButton: UIButton!
-   
+    
+    @IBOutlet var coloringButton: UIButton!
+    @IBOutlet var chickenButton: UIButton!
+    @IBOutlet var sSkip: SliderView!
+    @IBOutlet var sStripeDensity: SliderView!
+    @IBOutlet var sEscapeRadius2: SliderView!
+    @IBOutlet var sMultiplier: SliderView!
+    @IBOutlet var sR: SliderView!
+    @IBOutlet var sG: SliderView!
+    @IBOutlet var sB: SliderView!
+
+    var sList:[SliderView]! = nil
+
     @IBAction func resetButtonPressed(_ sender: UIButton) { reset() }
     
+    func updateButtonBackgrounds() {
+        let bsOff = UIColor(red:0.25, green:0.25, blue:0.25, alpha: 1)
+        let bsOn  = UIColor(red:0.1, green:0.3, blue:0.1, alpha: 1)
+        
+        coloringButton.backgroundColor = control.coloringFlag > 0 ? bsOn : bsOff
+        chickenButton.backgroundColor = control.chickenFlag > 0 ? bsOn : bsOff
+    }
+    
+    @IBAction func coloringChanged(_ sender: UIButton) {
+        control.coloringFlag = control.coloringFlag == 0 ? 1 : 0
+        updateButtonBackgrounds()
+        updateImage()
+    }
+    
+    @IBAction func chickenChanged(_ sender: UIButton) {
+        control.chickenFlag = control.chickenFlag == 0 ? 1 : 0
+        updateButtonBackgrounds()
+        updateImage()
+    }
+
     override var prefersStatusBarHidden: Bool { return true }
     
     //MARK: -
@@ -38,6 +70,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         vc = self
         
+        sList = [ sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB ]
+        
+        sSkip.initializeInt32(&control.skip,.delta,1,100,50,"Skip")
+        sStripeDensity.initializeFloat(&control.stripeDensity, .delta, -10,10,20, "StripeDensity")
+        sEscapeRadius2.initializeFloat(&control.escapeRadius2, .delta, 0,4000,4000, "EscapeRadius2")
+        sMultiplier.initializeFloat(&control.multiplier, .delta,-2,2,2, "Multiplier")
+        sR.initializeFloat(&control.R, .delta,0,1,5, "Color R")
+        sG.initializeFloat(&control.G, .delta,0,1,5, "Color G")
+        sB.initializeFloat(&control.B, .delta,0,1,5, "Color B")
+
         do {
             let defaultLibrary:MTLLibrary! = self.device.makeDefaultLibrary()
             guard let kf1 = defaultLibrary.makeFunction(name: "fractalShader")  else { fatalError() }
@@ -52,13 +94,20 @@ class ViewController: UIViewController {
         colorBuffer.contents().copyMemory(from:colorMap, byteCount:jbSize)
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        view.bringSubview(toFront:cMove)
+        view.bringSubview(toFront:cZoom)
+        view.bringSubview(toFront:coloringButton)
+        view.bringSubview(toFront:chickenButton)
+        view.bringSubview(toFront:resetButton)
+        view.bringSubview(toFront:helpButton)
+        for s in sList { view.bringSubview(toFront:s) }
+        
         timer = Timer.scheduledTimer(timeInterval: 1.0/60.0, target:self, selector: #selector(timerHandler), userInfo: nil, repeats:true)
-
         reset()
     }
     
@@ -69,7 +118,18 @@ class ViewController: UIViewController {
         control.xmax = 1;
         control.ymin = -1.5;
         control.ymax = 1.5;
-        
+
+        control.coloringFlag = 1;
+        control.chickenFlag = 0;
+        control.skip = 19;
+        control.stripeDensity = 1.699;
+        control.escapeRadius2 = 100000;
+        control.multiplier = 0.9005;
+        control.R = 0;
+        control.G = 0.4;
+        control.B = 0.7;        
+
+        updateButtonBackgrounds()
         updateImage()
     }
     
@@ -83,7 +143,8 @@ class ViewController: UIViewController {
         
         if cMove.update() { refresh = true }
         if cZoom.update() { refresh = true }
-        
+        for s in sList { if s.update() { refresh = true }}
+
         if refresh { updateImage() }
     }
     
@@ -109,12 +170,33 @@ class ViewController: UIViewController {
             maxsz / threadGroupCount.height,1)
     }
     
+    //MARK: -
+    
+    func removeAllFocus() {
+        for s in sList { if s.hasFocus { s.hasFocus = false; s.setNeedsDisplay() }}
+    }
+    
+    func focusMovement(_ pt:CGPoint) {
+        for s in sList { if s.hasFocus { s.focusMovement(pt); return }}
+    }
+    
+    //MARK: -
+
     @objc func rotated() {
         let vxs = view.bounds.width
         let vys = view.bounds.height
         let cxs = CGFloat(120)
         let xc = vxs/2
+
+        var x = CGFloat()
+        var y = CGFloat()
         
+        func frame(_ xs:CGFloat, _ ys:CGFloat, _ dx:CGFloat, _ dy:CGFloat) -> CGRect {
+            let r = CGRect(x:x, y:y, width:xs, height:ys)
+            x += dx; y += dy
+            return r
+        }
+
         imageView.frame = view.bounds
         cMove.frame = CGRect(x:50, y:vys-cxs-50, width:cxs, height:cxs)
         cZoom.frame = CGRect(x:vxs-50-cxs, y:vys-cxs-50, width:cxs, height:cxs)
@@ -124,6 +206,20 @@ class ViewController: UIViewController {
 
         self.view.bringSubview(toFront: resetButton)
         self.view.bringSubview(toFront: saveLoadButton)
+
+        x = 20
+        y = 20
+        let sWidth = CGFloat(150)
+        let yHop = CGFloat(50)
+        coloringButton.frame = frame(sWidth,35,0,yHop)
+        chickenButton.frame = frame(sWidth,35,0,yHop)
+        sSkip.frame = frame(sWidth,35,0,yHop)
+        sStripeDensity.frame = frame(sWidth,35,0,yHop)
+        sEscapeRadius2.frame = frame(sWidth,35,0,yHop)
+        sMultiplier.frame = frame(sWidth,35,0,yHop)
+        sR.frame = frame(sWidth,35,0,yHop)
+        sG.frame = frame(sWidth,35,0,yHop)
+        sB.frame = frame(sWidth,35,0,yHop)
 
         setImageViewResolutionAndThreadGroups()
     }

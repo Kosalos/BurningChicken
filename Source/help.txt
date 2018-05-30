@@ -3,13 +3,37 @@ Burning Chicken
 Just like the Burning Ship fractal,
 this is just one step removed from the Mandelbrot set.
 
-Comment out one line the shader to get the Mandelbrot.
-
-
-The two control widgets work the same way:
-
+The control widgets all work the same way:
 * Press and hold to either side of center to affect
   parameter(s) in specified direction and speed.
 * Double Tap to toggle Fast versus Slow editing.
   (Red vs Green background color)
+
+Note: Single tap on any widget to give it the FOCUS.
+It will gain a red colored border.
+Click and drag on the image to apply the movement to the widget.
+The widgets' Fast vs Slow edit style affects the movements.
+
+Visit: https://fractalforums.org/fractal-mathematics-and-new-theories/28/triangle-inequality-average-algorithm/1368
+User 3DickUlus posted a beautiful image with the fragment shader attached.
+I copied the algorithm onto this app to do some experimentation.
+
+A. Coloring
+   Toggle color method,  traditional color paletter lookup, or average Coloring algorithm.
+
+B. Chicken
+   Render the normal Mandelbrot set, or the slightly altered code to produce the Burning Chicken fractal.
+
+C. This group of widgets control the params to the Average Coloring algorithm.
+   Check out Shaders.metal for their usage.
+
+D. Move
+   Scroll the image in X/Y.
+
+E. Zoom
+   Zoom into the fractal.
+
+F. Save/Load
+   Launch the Save/Load dialog.
+
 

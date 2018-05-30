@@ -48,12 +48,6 @@
                                     </segue>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKK-Rp-etB" customClass="UIImageView">
-                                <rect key="frame" x="39" y="28" width="317" height="219"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <gestureRecognizers/>
-                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RpJ-lS-0xe" customClass="CMove" customModule="BurningChicken" customModuleProvider="target">
                                 <rect key="frame" x="39" y="273" width="127" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -78,6 +72,71 @@
                                     </segue>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyC-X7-Qm9" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
+                                <rect key="frame" x="473" y="169" width="95" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P00-0O-R7D" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
+                                <rect key="frame" x="473" y="209" width="95" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8m-rW-sye" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
+                                <rect key="frame" x="473" y="249" width="95" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s5a-9I-Rly" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
+                                <rect key="frame" x="473" y="289" width="95" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DC6-gd-udP" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
+                                <rect key="frame" x="473" y="329" width="95" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZtC-WN-Vtg" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
+                                <rect key="frame" x="473" y="369" width="95" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1YD-y0-bv3" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
+                                <rect key="frame" x="473" y="129" width="95" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oF7-Zc-Y6C">
+                                <rect key="frame" x="463" y="46" width="78" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Coloring">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="coloringChanged:" destination="BV1-FR-VrT" eventType="touchUpInside" id="oPB-Zb-cFq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R07-yV-kIW">
+                                <rect key="frame" x="463" y="85" width="78" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Chicken">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="chickenChanged:" destination="BV1-FR-VrT" eventType="touchUpInside" id="73P-mf-7ft"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" fixedFrame="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKK-Rp-etB" customClass="ImageView" customModule="BurningChicken" customModuleProvider="target">
+                                <rect key="frame" x="39" y="28" width="317" height="219"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.026657605508461555" green="0.077108541822286741" blue="0.15452622898527923" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <gestureRecognizers/>
@@ -86,15 +145,24 @@
                     <connections>
                         <outlet property="cMove" destination="RpJ-lS-0xe" id="DSS-od-g0W"/>
                         <outlet property="cZoom" destination="Knj-8m-l8D" id="pdH-jd-SeB"/>
+                        <outlet property="chickenButton" destination="R07-yV-kIW" id="4Sd-iE-zXa"/>
+                        <outlet property="coloringButton" destination="oF7-Zc-Y6C" id="AAj-3D-LFP"/>
                         <outlet property="helpButton" destination="gUW-2t-ZIx" id="MIj-05-rc9"/>
                         <outlet property="imageView" destination="SKK-Rp-etB" id="7YQ-Bm-Qam"/>
                         <outlet property="resetButton" destination="yfK-it-LnG" id="RUC-au-Bdh"/>
+                        <outlet property="sB" destination="ZtC-WN-Vtg" id="a5T-Dn-gDq"/>
+                        <outlet property="sEscapeRadius2" destination="P00-0O-R7D" id="OZn-ZX-ICp"/>
+                        <outlet property="sG" destination="DC6-gd-udP" id="ras-Jz-aoT"/>
+                        <outlet property="sMultiplier" destination="q8m-rW-sye" id="r7c-u6-at6"/>
+                        <outlet property="sR" destination="s5a-9I-Rly" id="zbs-d6-7TD"/>
+                        <outlet property="sSkip" destination="1YD-y0-bv3" id="8jq-sS-5UQ"/>
+                        <outlet property="sStripeDensity" destination="gyC-X7-Qm9" id="Qnb-Eu-aie"/>
                         <outlet property="saveLoadButton" destination="HeO-5k-4ZX" id="2lA-b6-kMi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-836.1328125" y="-653.14787701317709"/>
+            <point key="canvasLocation" x="-871.2890625" y="-665.00732064421663"/>
         </scene>
         <!--SaveLoadVC-->
         <scene sceneID="7cL-dd-aq2">
@@ -120,7 +188,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UZq-6A-MRc">
-                                                    <rect key="frame" x="9" y="6" width="287" height="41"/>
+                                                    <rect key="frame" x="2" y="3" width="287" height="46.5"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="287" id="KyH-Hh-fWP"/>
@@ -133,7 +201,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufx-IT-ja3">
-                                                    <rect key="frame" x="304" y="6" width="54" height="41"/>
+                                                    <rect key="frame" x="297" y="3" width="68" height="46.5"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="Bc1-68-PZl"/>
@@ -196,21 +264,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFJ-2t-2Yd">
-                                <rect key="frame" x="21" y="28" width="599" height="552"/>
+                                <rect key="frame" x="21" y="311" width="599" height="269"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="269" id="Zyo-Qz-OQO"/>
+                                </constraints>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="help" translatesAutoresizingMaskIntoConstraints="NO" id="siP-gk-qmm">
+                                <rect key="frame" x="21" y="28" width="599" height="275"/>
+                            </imageView>
                         </subviews>
                         <accessibility key="accessibilityConfiguration">
                             <accessibilityTraits key="traits" staticText="YES"/>
                         </accessibility>
                         <constraints>
-                            <constraint firstItem="LFJ-2t-2Yd" firstAttribute="leading" secondItem="dWY-RQ-I3o" secondAttribute="leadingMargin" constant="1" id="1o8-RX-EYm"/>
-                            <constraint firstAttribute="bottom" secondItem="LFJ-2t-2Yd" secondAttribute="bottom" constant="20" symbolic="YES" id="2ON-lV-u38"/>
-                            <constraint firstItem="LFJ-2t-2Yd" firstAttribute="top" secondItem="wV2-J6-T2n" secondAttribute="bottom" constant="8" symbolic="YES" id="8QO-ta-DKq"/>
-                            <constraint firstItem="LFJ-2t-2Yd" firstAttribute="centerX" secondItem="dWY-RQ-I3o" secondAttribute="centerX" id="K9K-Ab-gNX"/>
+                            <constraint firstItem="siP-gk-qmm" firstAttribute="leading" secondItem="dWY-RQ-I3o" secondAttribute="leading" constant="21" id="35O-gf-sOC"/>
+                            <constraint firstAttribute="bottom" secondItem="LFJ-2t-2Yd" secondAttribute="bottom" constant="20" symbolic="YES" id="6ZS-Iq-hwE"/>
+                            <constraint firstItem="siP-gk-qmm" firstAttribute="top" secondItem="wV2-J6-T2n" secondAttribute="bottom" constant="8" id="ZFw-x4-RwO"/>
+                            <constraint firstAttribute="trailing" secondItem="siP-gk-qmm" secondAttribute="trailing" constant="20" id="atl-wm-bSU"/>
+                            <constraint firstItem="LFJ-2t-2Yd" firstAttribute="trailing" secondItem="siP-gk-qmm" secondAttribute="trailing" id="dXo-1Q-dLI"/>
+                            <constraint firstItem="LFJ-2t-2Yd" firstAttribute="leading" secondItem="siP-gk-qmm" secondAttribute="leading" id="ins-lH-PWg"/>
+                            <constraint firstItem="LFJ-2t-2Yd" firstAttribute="top" secondItem="siP-gk-qmm" secondAttribute="bottom" constant="8" id="lmF-nI-7sh"/>
                         </constraints>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="640" height="600"/>
@@ -224,4 +301,7 @@
             <point key="canvasLocation" x="-462.30468749999994" y="-649.19472913616391"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="help" width="1024" height="473"/>
+    </resources>
 </document>
