@@ -68,6 +68,53 @@ kernel void fractalShader
 }
 
 // ======================================================================
+
+kernel void shadowShader
+(
+ texture2d<float, access::read> src [[texture(0)]],
+ texture2d<float, access::write> dst [[texture(1)]],
+ uint2 p [[thread_position_in_grid]])
+{
+    float4 v = src.read(p);
+    
+    if(p.x > 1 && p.y > 1) {
+        bool shadow = false;
+        
+        {
+            uint2 p2 = p;
+            p2.x -= 1;
+            float4 vx = src.read(p2);
+            if(v.x < vx.x || v.y < vx.y) shadow = true;
+        }
+        
+        if(!shadow)
+        {
+            uint2 p2 = p;
+            p2.y -= 1;
+            float4 vx = src.read(p2);
+            if(v.x < vx.x || v.y < vx.y) shadow = true;
+        }
+        
+        if(!shadow)
+        {
+            uint2 p2 = p;
+            p2.x -= 1;
+            p2.y -= 1;
+            float4 vx = src.read(p2);
+            if(v.x < vx.x || v.y < vx.y) shadow = true;
+        }
+        
+        if(shadow) {
+            v.x /= 4;
+            v.y /= 4;
+            v.z /= 4;
+        }
+    }
+    
+    dst.write(v,p);
+}
+
+// ======================================================================
 // ======================================================================
 // ======================================================================
 /*  yesterday's rendition

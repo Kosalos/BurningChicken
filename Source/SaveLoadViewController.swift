@@ -136,7 +136,7 @@ class SaveLoadViewController: UIViewController,UITableViewDataSource, UITableVie
     
     func loadAndDismissDialog(_ index:Int, _ cc: inout Control) {
         loadData(index,&cc,true)
-        self.dismiss(animated: false, completion: {()->Void in vc.updateImage() })
+        self.dismiss(animated: false, completion: {()->Void in vc.refresh() })
     }
 }
 

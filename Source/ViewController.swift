@@ -12,8 +12,10 @@ class ViewController: UIViewController {
     var timer = Timer()
     var controlBuffer:MTLBuffer! = nil
     var colorBuffer:MTLBuffer! = nil
-    var outTexture: MTLTexture!
+    var texture1: MTLTexture!
+    var texture2: MTLTexture!
     var pipeline1: MTLComputePipelineState!
+    var pipeline2: MTLComputePipelineState!
     let queue = DispatchQueue(label: "Queue")
     lazy var device: MTLDevice! = MTLCreateSystemDefaultDevice()
     lazy var commandQueue: MTLCommandQueue! = { return self.device.makeCommandQueue() }()
@@ -27,7 +29,8 @@ class ViewController: UIViewController {
     @IBOutlet var resetButton: UIButton!
     @IBOutlet var saveLoadButton: UIButton!
     @IBOutlet var helpButton: UIButton!
-    
+    @IBOutlet var shadowButton: UIButton!
+
     @IBOutlet var coloringButton: UIButton!
     @IBOutlet var chickenButton: UIButton!
     @IBOutlet var sSkip: SliderView!
@@ -40,29 +43,37 @@ class ViewController: UIViewController {
     @IBOutlet var sIter: SliderView!
 
     var sList:[SliderView]! = nil
+    var shadowFlag:Bool = false
 
     @IBAction func resetButtonPressed(_ sender: UIButton) { reset() }
     
-    func updateButtonBackgrounds() {
+    func updateWidgets() {
         let bsOff = UIColor(red:0.25, green:0.25, blue:0.25, alpha: 1)
         let bsOn  = UIColor(red:0.1, green:0.3, blue:0.1, alpha: 1)
         
         coloringButton.backgroundColor = control.coloringFlag > 0 ? bsOn : bsOff
         chickenButton.backgroundColor = control.chickenFlag > 0 ? bsOn : bsOff
+        shadowButton.backgroundColor = shadowFlag ? bsOn : bsOff
+
+        let coloringWidgets = [ sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB ]
+        for c in coloringWidgets { c?.isHidden = control.coloringFlag == 0 }
     }
     
     @IBAction func coloringChanged(_ sender: UIButton) {
         control.coloringFlag = control.coloringFlag == 0 ? 1 : 0
-        updateButtonBackgrounds()
-        updateImage()
+        refresh()
     }
     
     @IBAction func chickenChanged(_ sender: UIButton) {
         control.chickenFlag = control.chickenFlag == 0 ? 1 : 0
-        updateButtonBackgrounds()
-        updateImage()
+        refresh()
     }
 
+    @IBAction func shadowChanged(_ sender: UIButton) {
+        shadowFlag = !shadowFlag
+        refresh()
+    }
+    
     override var prefersStatusBarHidden: Bool { return true }
     
     //MARK: -
@@ -86,6 +97,9 @@ class ViewController: UIViewController {
             let defaultLibrary:MTLLibrary! = self.device.makeDefaultLibrary()
             guard let kf1 = defaultLibrary.makeFunction(name: "fractalShader")  else { fatalError() }
             pipeline1 = try device.makeComputePipelineState(function: kf1)
+            
+            guard let kf2 = defaultLibrary.makeFunction(name: "shadowShader")  else { fatalError() }
+            pipeline2 = try device.makeComputePipelineState(function: kf2)
         }
         catch { fatalError("error creating pipelines") }
 
@@ -105,6 +119,7 @@ class ViewController: UIViewController {
         view.bringSubview(toFront:cZoom)
         view.bringSubview(toFront:coloringButton)
         view.bringSubview(toFront:chickenButton)
+        view.bringSubview(toFront:shadowButton)
         view.bringSubview(toFront:resetButton)
         view.bringSubview(toFront:helpButton)
         for s in sList { view.bringSubview(toFront:s) }
@@ -117,6 +132,11 @@ class ViewController: UIViewController {
     
     //MARK: -
 
+    func refresh() {
+        updateWidgets()
+        updateImage()
+    }
+    
     func reset() {
         control.xmin = -2
         control.xmax = 1
@@ -125,15 +145,14 @@ class ViewController: UIViewController {
 
         control.skip = 19
         control.stripeDensity = 1.699
-        control.escapeRadius2 = 100000
+        control.escapeRadius2 = 2
         control.multiplier = 0.9005
         control.R = 0
         control.G = 0.4
         control.B = 0.7
         control.maxIter = 256
 
-        updateButtonBackgrounds()
-        updateImage()
+        refresh()
     }
     
     //MARK: -
@@ -165,7 +184,8 @@ class ViewController: UIViewController {
             width: xsz,
             height: ysz,
             mipmapped: false)
-        outTexture = self.device.makeTexture(descriptor: textureDescriptor)!
+        texture1 = self.device.makeTexture(descriptor: textureDescriptor)!
+        texture2 = self.device.makeTexture(descriptor: textureDescriptor)!
 
         let maxsz = max(xsz,ysz) + Int(threadGroupCount.width-1)
         threadGroups = MTLSizeMake(
@@ -214,16 +234,8 @@ class ViewController: UIViewController {
         y = 20
         let sWidth = CGFloat(150)
         let yHop = CGFloat(50)
-        coloringButton.frame = frame(sWidth,35,0,yHop)
-        chickenButton.frame = frame(sWidth,35,0,yHop)
-        sSkip.frame = frame(sWidth,35,0,yHop)
-        sStripeDensity.frame = frame(sWidth,35,0,yHop)
-        sEscapeRadius2.frame = frame(sWidth,35,0,yHop)
-        sMultiplier.frame = frame(sWidth,35,0,yHop)
-        sR.frame = frame(sWidth,35,0,yHop)
-        sG.frame = frame(sWidth,35,0,yHop)
-        sB.frame = frame(sWidth,35,0,yHop)
-        sIter.frame = frame(sWidth,35,0,yHop)
+        let widgetGroup:[UIView] = [ coloringButton,chickenButton,shadowButton,sIter,sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB ]
+        for w in widgetGroup { w.frame = frame(sWidth,35,0,yHop) }
 
         setImageViewResolutionAndThreadGroups()
     }
@@ -267,12 +279,28 @@ class ViewController: UIViewController {
         let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
         
         commandEncoder.setComputePipelineState(pipeline1)
-        commandEncoder.setTexture(outTexture, index: 0)
+        commandEncoder.setTexture(texture1, index: 0)
         commandEncoder.setBuffer(controlBuffer, offset: 0, index: 0)
         commandEncoder.setBuffer(colorBuffer, offset: 0, index: 1)
         commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
         commandEncoder.endEncoding()
 
+        commandBuffer.commit()
+        commandBuffer.waitUntilCompleted()
+        
+        if shadowFlag { applyShadow() }
+    }
+    
+    func applyShadow() {
+        let commandBuffer = commandQueue.makeCommandBuffer()!
+        let commandEncoder = commandBuffer.makeComputeCommandEncoder()!
+        
+        commandEncoder.setComputePipelineState(pipeline2)
+        commandEncoder.setTexture(texture1, index: 0)
+        commandEncoder.setTexture(texture2, index: 1)
+        commandEncoder.dispatchThreadgroups(threadGroups, threadsPerThreadgroup: threadGroupCount)
+        commandEncoder.endEncoding()
+        
         commandBuffer.commit()
         commandBuffer.waitUntilCompleted()
     }
@@ -316,7 +344,9 @@ class ViewController: UIViewController {
             queue.async {
                 self.calcFractal()
                 self.isBusy = false
-                DispatchQueue.main.async { self.imageView.image = self.image(from: self.outTexture) }
+                
+                let texture = self.shadowFlag ? self.texture2 : self.texture1
+                DispatchQueue.main.async { self.imageView.image = self.image(from: texture!) }
             }
         }
     }

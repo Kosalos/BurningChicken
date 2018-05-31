@@ -157,6 +157,16 @@ class SliderView: UIView {
         context!.addPath(path.cgPath)
         context!.strokePath()
 
+        // cursor -------------------------------------------------
+        let x = valueRatio() * bounds.width
+        context!.setStrokeColor(widgetEdgeColor.cgColor)
+        context!.setLineWidth(4)
+        path.removeAllPoints()
+        path.move(to: CGPoint(x:x, y:0))
+        path.addLine(to: CGPoint(x:x, y:bounds.height))
+        context!.addPath(path.cgPath)
+        context!.strokePath()
+        
         // value ------------------------------------------
         func formatted(_ v:Float) -> String { return String(format:"%6.4f",v) }
         func formatted2(_ v:Float) -> String { return String(format:"%7.5f",v) }
@@ -192,16 +202,6 @@ class SliderView: UIView {
 //                }
 //            }
         }
-        
-        // cursor -------------------------------------------------
-        let x = valueRatio() * bounds.width
-        context!.setStrokeColor(widgetEdgeColor.cgColor)
-        context!.setLineWidth(4)
-        path.removeAllPoints()
-        path.move(to: CGPoint(x:x, y:0))
-        path.addLine(to: CGPoint(x:x, y:bounds.height))
-        context!.addPath(path.cgPath)
-        context!.strokePath()
         
         // highlight --------------------------------------
         

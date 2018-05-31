@@ -19,7 +19,7 @@ User 3DickUlus posted a beautiful image with the fragment shader attached.
 I copied the algorithm onto this app to do some experimentation.
 
 A. Coloring
-   Toggle color method,  traditional color paletter lookup, or average Coloring algorithm.
+   Toggle color method,  traditional color palette lookup, or average Coloring algorithm.
 
 B. Chicken
    Render the normal Mandelbrot set, or the slightly altered code to produce the Burning Chicken fractal.
@@ -35,5 +35,11 @@ E. Zoom
 
 F. Save/Load
    Launch the Save/Load dialog.
+
+G. Shadow
+   Toggle whether shadowing effect is added
+
+H. maxIterations
+   Specify the number of interations the shader uses.
 
 
