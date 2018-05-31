@@ -72,9 +72,9 @@ class ViewController: UIViewController {
         
         sList = [ sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB ]
         
-        sSkip.initializeInt32(&control.skip,.delta,1,100,50,"Skip")
+        sSkip.initializeInt32(&control.skip,.delta,1,100,20,"Skip")
         sStripeDensity.initializeFloat(&control.stripeDensity, .delta, -10,10,20, "StripeDensity")
-        sEscapeRadius2.initializeFloat(&control.escapeRadius2, .delta, 0,4000,4000, "EscapeRadius2")
+        sEscapeRadius2.initializeFloat(&control.escapeRadius2, .delta, 0.01,4,4, "EscapeRadius2")
         sMultiplier.initializeFloat(&control.multiplier, .delta,-2,2,2, "Multiplier")
         sR.initializeFloat(&control.R, .delta,0,1,5, "Color R")
         sG.initializeFloat(&control.G, .delta,0,1,5, "Color G")
@@ -301,11 +301,19 @@ class ViewController: UIViewController {
         
         return UIImage(cgImage: dstImageFilter!, scale: 0.0, orientation: UIImageOrientation.up)
     }
+
+    //MARK: -
+
+    var isBusy:Bool = false
     
     func updateImage() {
-        queue.async {
-            self.calcFractal()
-            DispatchQueue.main.async { self.imageView.image = self.image(from: self.outTexture) }
+        if !isBusy {
+            isBusy = true
+            queue.async {
+                self.calcFractal()
+                self.isBusy = false
+                DispatchQueue.main.async { self.imageView.image = self.image(from: self.outTexture) }
+            }
         }
     }
 }

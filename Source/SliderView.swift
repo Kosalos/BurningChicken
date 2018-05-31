@@ -279,6 +279,8 @@ class SliderView: UIView {
             value = fClamp2(value + delta * deltaValue * scale, mRange)
         }
         
+        //print(String(format:"V %8.5f,  D %8.5f,  Dv %8.5f",value,delta,deltaValue))
+        
         switch valuetype {
         case .int32 : valuePointer.storeBytes(of:Int32(value), as:Int32.self)
         case .float : valuePointer.storeBytes(of:value, as:Float.self)
@@ -293,7 +295,7 @@ class SliderView: UIView {
     func focusMovement(_ pt:CGPoint) {
         if pt.x == 0 { touched = false; return }
         
-        delta = Float(pt.x) / 1000
+        delta = Float(pt.x) / Float((valuetype == .int32) ? 100 : 1000)
         
         if !fastEdit {
             delta /= 100
