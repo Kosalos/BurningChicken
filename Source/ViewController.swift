@@ -37,6 +37,7 @@ class ViewController: UIViewController {
     @IBOutlet var sR: SliderView!
     @IBOutlet var sG: SliderView!
     @IBOutlet var sB: SliderView!
+    @IBOutlet var sIter: SliderView!
 
     var sList:[SliderView]! = nil
 
@@ -70,7 +71,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         vc = self
         
-        sList = [ sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB ]
+        sList = [ sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB,sIter ]
         
         sSkip.initializeInt32(&control.skip,.delta,1,100,20,"Skip")
         sStripeDensity.initializeFloat(&control.stripeDensity, .delta, -10,10,20, "StripeDensity")
@@ -79,6 +80,7 @@ class ViewController: UIViewController {
         sR.initializeFloat(&control.R, .delta,0,1,5, "Color R")
         sG.initializeFloat(&control.G, .delta,0,1,5, "Color G")
         sB.initializeFloat(&control.B, .delta,0,1,5, "Color B")
+        sIter.initializeInt32(&control.maxIter,.delta,100,2000,200,"maxIterations")
 
         do {
             let defaultLibrary:MTLLibrary! = self.device.makeDefaultLibrary()
@@ -108,26 +110,27 @@ class ViewController: UIViewController {
         for s in sList { view.bringSubview(toFront:s) }
         
         timer = Timer.scheduledTimer(timeInterval: 1.0/60.0, target:self, selector: #selector(timerHandler), userInfo: nil, repeats:true)
+        control.coloringFlag = 1
+        control.chickenFlag = 0
         reset()
     }
     
     //MARK: -
 
     func reset() {
-        control.xmin = -2;
-        control.xmax = 1;
-        control.ymin = -1.5;
-        control.ymax = 1.5;
+        control.xmin = -2
+        control.xmax = 1
+        control.ymin = -1.5
+        control.ymax = 1.5
 
-        control.coloringFlag = 1;
-        control.chickenFlag = 0;
-        control.skip = 19;
-        control.stripeDensity = 1.699;
-        control.escapeRadius2 = 100000;
-        control.multiplier = 0.9005;
-        control.R = 0;
-        control.G = 0.4;
-        control.B = 0.7;        
+        control.skip = 19
+        control.stripeDensity = 1.699
+        control.escapeRadius2 = 100000
+        control.multiplier = 0.9005
+        control.R = 0
+        control.G = 0.4
+        control.B = 0.7
+        control.maxIter = 256
 
         updateButtonBackgrounds()
         updateImage()
@@ -220,6 +223,7 @@ class ViewController: UIViewController {
         sR.frame = frame(sWidth,35,0,yHop)
         sG.frame = frame(sWidth,35,0,yHop)
         sB.frame = frame(sWidth,35,0,yHop)
+        sIter.frame = frame(sWidth,35,0,yHop)
 
         setImageViewResolutionAndThreadGroups()
     }

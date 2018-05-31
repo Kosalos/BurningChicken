@@ -26,6 +26,7 @@ struct Control {
     float R;
     float G;
     float B;
+    int maxIter;
 
     float future1;
     float future2;

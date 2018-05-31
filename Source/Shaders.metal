@@ -17,14 +17,13 @@ kernel void fractalShader
 
     float2 c = float2(control.xmin + control.dx * float(p.x), control.ymin + control.dy * float(p.y));
     int iter;
-    int maxIter = 256;
     float avg = 0;
     float lastAdded = 0;
     float count = 0;
     float2 z = float2();
     float z2 = 0;
 
-    for(iter = 0;iter < maxIter;++iter) {
+    for(iter = 0;iter < control.maxIter;++iter) {
         z = complexMul(z,z) + c;
         
         if(iter >= control.skip) {
@@ -49,7 +48,7 @@ kernel void fractalShader
             float frac = 1.0 + (log2(log(control.escapeRadius2) / log(z2)));
             float mix = frac * avg + (1.0 - frac) * prevAvg;
         
-            if(iter < maxIter) {
+            if(iter < control.maxIter) {
                 float co = mix * pow(10.0,control.multiplier);
                 co = clamp(co,0.0,10000.0) * 6.2831;
                 icolor.x = 0.5 + 0.5 * cos(co + control.R);
