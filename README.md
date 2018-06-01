@@ -8,4 +8,8 @@ Visit: https://fractalforums.org/fractal-mathematics-and-new-theories/28/triangl
 User 3DickUlus posted a beautiful image with the fragment shader attached.\
 I copied the algorithm onto this app to do some experimentation.
 
+<a href="https://www.paypal.me/Kosalos/">
+  <img alt="Support via PayPal" src="https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg"/>
+</a>
+
 ![Screenshot](screenShot.png)
