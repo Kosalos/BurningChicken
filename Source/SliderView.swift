@@ -90,6 +90,15 @@ class SliderView: UIView {
         setNeedsDisplay()
     }
     
+    func removeFocus() {
+        if hasFocus {
+            hasFocus = false
+            delta = 0
+            
+            setNeedsDisplay()
+        }
+    }
+    
     //MARK: ==================================
     
     @objc func handleTap1(_ sender: UITapGestureRecognizer) {
@@ -215,7 +224,10 @@ class SliderView: UIView {
 
         if hasFocus {
             UIColor.red.setStroke()
-            UIBezierPath(rect:bounds).stroke()
+            let path2 = UIBezierPath(rect:bounds.insetBy(dx: 1, dy: 1))
+            context!.setLineWidth(2)
+            context!.addPath(path2.cgPath)
+            context!.strokePath()
         }
     }
     

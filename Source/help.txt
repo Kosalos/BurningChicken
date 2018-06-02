@@ -42,6 +42,8 @@ G. Shadow
 H. maxIterations
    Specify the number of interations the shader uses.
 
-   Contrast
+J. Contrast
    adjust the RGB deviations from midpoint
 
+K. sR, sI
+   tweak the Real and Imaginary fields during complex multiplication

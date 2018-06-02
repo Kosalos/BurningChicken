@@ -42,6 +42,8 @@ class ViewController: UIViewController {
     @IBOutlet var sB: SliderView!
     @IBOutlet var sIter: SliderView!
     @IBOutlet var sContrast: SliderView!
+    @IBOutlet var sSR: SliderView!
+    @IBOutlet var sSI: SliderView!
 
     var sList:[SliderView]! = nil
     var shadowFlag:Bool = false
@@ -62,17 +64,17 @@ class ViewController: UIViewController {
     
     @IBAction func coloringChanged(_ sender: UIButton) {
         control.coloringFlag = control.coloringFlag == 0 ? 1 : 0
-        refresh()
+        refresh(false)
     }
     
     @IBAction func chickenChanged(_ sender: UIButton) {
         control.chickenFlag = control.chickenFlag == 0 ? 1 : 0
-        refresh()
+        refresh(false)
     }
 
     @IBAction func shadowChanged(_ sender: UIButton) {
         shadowFlag = !shadowFlag
-        refresh()
+        refresh(false)
     }
     
     override var prefersStatusBarHidden: Bool { return true }
@@ -83,7 +85,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         vc = self
         
-        sList = [ sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB,sIter,sContrast ]
+        sList = [ sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB,sIter,sContrast,sSR,sSI ]
         
         sSkip.initializeInt32(&control.skip,.delta,1,100,20,"Skip")
         sStripeDensity.initializeFloat(&control.stripeDensity, .delta, -10,10,20, "StripeDensity")
@@ -94,6 +96,8 @@ class ViewController: UIViewController {
         sB.initializeFloat(&control.B, .delta,0,1,5, "Color B")
         sIter.initializeInt32(&control.maxIter,.delta,100,2000,200,"maxIterations")
         sContrast.initializeFloat(&control.contrast, .delta,0.1,5,3, "Contrast")
+        sSR.initializeFloat(&control.sR, .delta,-2,3,1, "sR")
+        sSI.initializeFloat(&control.sI, .delta,-2,3,1, "sI")
 
         do {
             let defaultLibrary:MTLLibrary! = self.device.makeDefaultLibrary()
@@ -130,13 +134,27 @@ class ViewController: UIViewController {
         control.coloringFlag = 1
         control.chickenFlag = 0
         reset()
+        
+        let _ = Timer.scheduledTimer(withTimeInterval:0.5, repeats: false) { timer in self.alterPosition(0,0) } // coldstart: kick GUI so image draws correctly
     }
     
     //MARK: -
 
-    func refresh() {
+    func refresh(_ rePaintSliders:Bool) {
         updateWidgets()
         updateImage()
+        
+        if rePaintSliders { for s in sList { s.setNeedsDisplay() }}
+    }
+    
+    func loadedData() {     // just loaded older dataset missing new params
+        if control.contrast < 0.1 {
+            control.contrast = 1
+            control.sR = 1
+            control.sI = 1
+        }
+
+        refresh(true)
     }
     
     func reset() {
@@ -145,17 +163,19 @@ class ViewController: UIViewController {
         control.ymin = -1.5
         control.ymax = 1.5
 
-        control.skip = 19
-        control.stripeDensity = 1.699
-        control.escapeRadius2 = 2
-        control.multiplier = 0.9005
+        control.skip = 20
+        control.stripeDensity = -1.343
+        control.escapeRadius2 = 1.702
+        control.multiplier = -0.381
         control.R = 0
         control.G = 0.4
         control.B = 0.7
         control.maxIter = 256
         control.contrast = 1
+        control.sR = 1
+        control.sI = 1
 
-        refresh()
+        refresh(true)
     }
     
     //MARK: -
@@ -199,7 +219,7 @@ class ViewController: UIViewController {
     //MARK: -
     
     func removeAllFocus() {
-        for s in sList { if s.hasFocus { s.hasFocus = false; s.setNeedsDisplay() }}
+        for s in sList { if s.hasFocus { s.removeFocus() }}
     }
     
     func focusMovement(_ pt:CGPoint) {
@@ -235,10 +255,8 @@ class ViewController: UIViewController {
 
         x = 20
         y = 20
-        let sWidth = CGFloat(150)
-        let yHop = CGFloat(40)
-        let widgetGroup:[UIView] = [ coloringButton,chickenButton,shadowButton,sIter,sContrast,sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB ]
-        for w in widgetGroup { w.frame = frame(sWidth,35,0,yHop) }
+        let widgetGroup:[UIView] = [ coloringButton,chickenButton,shadowButton,sIter,sContrast,sSR,sSI,sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB ]
+        for w in widgetGroup { w.frame = frame(130,32,0,36) }
 
         setImageViewResolutionAndThreadGroups()
     }

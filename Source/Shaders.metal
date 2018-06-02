@@ -3,7 +3,7 @@
 
 using namespace metal;
 
-float2 complexMul(float2 v1, float2 v2) { return float2(v1.x * v2.x - v1.y * v2.y, v1.x * v2.y + v1.y * v2.x); }
+float2 complexMul(float2 v1, float2 v2, float sR, float sI) { return float2((v1.x * v2.x - v1.y * v2.y) * sR, (v1.x * v2.y + v1.y * v2.x) * sI); }
 
 kernel void fractalShader
 (
@@ -24,7 +24,7 @@ kernel void fractalShader
     float z2 = 0;
 
     for(iter = 0;iter < control.maxIter;++iter) {
-        z = complexMul(z,z) + c;
+        z = complexMul(z,z,control.sR,control.sI) + c;
         
         if(iter >= control.skip) {
             count += 1;

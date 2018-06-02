@@ -159,6 +159,16 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gvg-y9-Pdd" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
+                                <rect key="frame" x="279" y="475" width="95" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jKQ-O3-leO" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
+                                <rect key="frame" x="279" y="515" width="95" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.026657605508461555" green="0.077108541822286741" blue="0.15452622898527923" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <gestureRecognizers/>
@@ -179,6 +189,8 @@
                         <outlet property="sIter" destination="I1R-lQ-AWk" id="iwf-5K-mii"/>
                         <outlet property="sMultiplier" destination="q8m-rW-sye" id="r7c-u6-at6"/>
                         <outlet property="sR" destination="s5a-9I-Rly" id="zbs-d6-7TD"/>
+                        <outlet property="sSI" destination="jKQ-O3-leO" id="DEq-3l-wmn"/>
+                        <outlet property="sSR" destination="gvg-y9-Pdd" id="MOy-8S-16k"/>
                         <outlet property="sSkip" destination="1YD-y0-bv3" id="8jq-sS-5UQ"/>
                         <outlet property="sStripeDensity" destination="gyC-X7-Qm9" id="Qnb-Eu-aie"/>
                         <outlet property="saveLoadButton" destination="HeO-5k-4ZX" id="2lA-b6-kMi"/>
