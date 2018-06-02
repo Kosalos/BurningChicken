@@ -63,6 +63,10 @@ kernel void fractalShader
         icolor = color[iter];
     }
     
+    icolor.x = 0.5 + (icolor.x - 0.5) * control.contrast;
+    icolor.y = 0.5 + (icolor.y - 0.5) * control.contrast;
+    icolor.z = 0.5 + (icolor.z - 0.5) * control.contrast;
+
     outTexture.write(float4(icolor,1),p);
     
 }

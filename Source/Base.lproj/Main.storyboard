@@ -73,32 +73,32 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gyC-X7-Qm9" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
-                                <rect key="frame" x="473" y="210" width="95" height="32"/>
+                                <rect key="frame" x="473" y="251" width="95" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P00-0O-R7D" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
-                                <rect key="frame" x="473" y="250" width="95" height="32"/>
+                                <rect key="frame" x="473" y="291" width="95" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q8m-rW-sye" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
-                                <rect key="frame" x="473" y="290" width="95" height="32"/>
+                                <rect key="frame" x="473" y="331" width="95" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s5a-9I-Rly" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
-                                <rect key="frame" x="473" y="330" width="95" height="32"/>
+                                <rect key="frame" x="473" y="371" width="95" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DC6-gd-udP" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
-                                <rect key="frame" x="473" y="370" width="95" height="32"/>
+                                <rect key="frame" x="473" y="411" width="95" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZtC-WN-Vtg" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
-                                <rect key="frame" x="473" y="410" width="95" height="32"/>
+                                <rect key="frame" x="473" y="451" width="95" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -138,7 +138,7 @@
                                 <gestureRecognizers/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="I1R-lQ-AWk" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
-                                <rect key="frame" x="473" y="450" width="95" height="32"/>
+                                <rect key="frame" x="473" y="491" width="95" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -154,6 +154,11 @@
                                     <action selector="shadowChanged:" destination="BV1-FR-VrT" eventType="touchUpInside" id="WGi-Wi-Uci"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xVe-hA-FOv" customClass="SliderView" customModule="BurningChicken" customModuleProvider="target">
+                                <rect key="frame" x="473" y="210" width="95" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.026657605508461555" green="0.077108541822286741" blue="0.15452622898527923" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <gestureRecognizers/>
@@ -168,6 +173,7 @@
                         <outlet property="imageView" destination="SKK-Rp-etB" id="7YQ-Bm-Qam"/>
                         <outlet property="resetButton" destination="yfK-it-LnG" id="RUC-au-Bdh"/>
                         <outlet property="sB" destination="ZtC-WN-Vtg" id="a5T-Dn-gDq"/>
+                        <outlet property="sContrast" destination="xVe-hA-FOv" id="Mfd-d7-qKc"/>
                         <outlet property="sEscapeRadius2" destination="P00-0O-R7D" id="OZn-ZX-ICp"/>
                         <outlet property="sG" destination="DC6-gd-udP" id="ras-Jz-aoT"/>
                         <outlet property="sIter" destination="I1R-lQ-AWk" id="iwf-5K-mii"/>

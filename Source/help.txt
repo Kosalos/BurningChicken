@@ -42,4 +42,6 @@ G. Shadow
 H. maxIterations
    Specify the number of interations the shader uses.
 
+   Contrast
+   adjust the RGB deviations from midpoint
 

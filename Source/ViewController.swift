@@ -41,6 +41,7 @@ class ViewController: UIViewController {
     @IBOutlet var sG: SliderView!
     @IBOutlet var sB: SliderView!
     @IBOutlet var sIter: SliderView!
+    @IBOutlet var sContrast: SliderView!
 
     var sList:[SliderView]! = nil
     var shadowFlag:Bool = false
@@ -82,7 +83,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         vc = self
         
-        sList = [ sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB,sIter ]
+        sList = [ sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB,sIter,sContrast ]
         
         sSkip.initializeInt32(&control.skip,.delta,1,100,20,"Skip")
         sStripeDensity.initializeFloat(&control.stripeDensity, .delta, -10,10,20, "StripeDensity")
@@ -92,6 +93,7 @@ class ViewController: UIViewController {
         sG.initializeFloat(&control.G, .delta,0,1,5, "Color G")
         sB.initializeFloat(&control.B, .delta,0,1,5, "Color B")
         sIter.initializeInt32(&control.maxIter,.delta,100,2000,200,"maxIterations")
+        sContrast.initializeFloat(&control.contrast, .delta,0.1,5,3, "Contrast")
 
         do {
             let defaultLibrary:MTLLibrary! = self.device.makeDefaultLibrary()
@@ -151,6 +153,7 @@ class ViewController: UIViewController {
         control.G = 0.4
         control.B = 0.7
         control.maxIter = 256
+        control.contrast = 1
 
         refresh()
     }
@@ -233,8 +236,8 @@ class ViewController: UIViewController {
         x = 20
         y = 20
         let sWidth = CGFloat(150)
-        let yHop = CGFloat(50)
-        let widgetGroup:[UIView] = [ coloringButton,chickenButton,shadowButton,sIter,sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB ]
+        let yHop = CGFloat(40)
+        let widgetGroup:[UIView] = [ coloringButton,chickenButton,shadowButton,sIter,sContrast,sSkip,sStripeDensity,sEscapeRadius2,sMultiplier,sR,sG,sB ]
         for w in widgetGroup { w.frame = frame(sWidth,35,0,yHop) }
 
         setImageViewResolutionAndThreadGroups()

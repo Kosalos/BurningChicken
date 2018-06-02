@@ -28,7 +28,7 @@ struct Control {
     float B;
     int maxIter;
 
-    float future1;
+    float contrast;
     float future2;
     float future3;
     float future4;
